@@ -8,7 +8,7 @@ python sudoku.py --solver="solver invocation"
 ```
 
 This will generate two text files: puzzle.txt and solution.txt. puzzle.txt is a sudoku puzzle to be
-solved (with 0s representing squares to be solved). solution.txt is the unique solution to the puzzle.ls *
+solved (with 0s representing squares to be solved). solution.txt is the unique solution to the puzzle.
 
 ### Arguments
 

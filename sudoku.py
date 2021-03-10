@@ -10,9 +10,12 @@ def unique_row(n):
         row.append(l.pop(int((random.random() * len(l)))))
     return row
 
-# adds PBO constraints to s
-# that ensures that each square only has one variable assigned 1
-# i.e. each square should only have one number in the solution
+''' 
+square_rules:
+    adds PBO constraints to s
+    that ensures that each square only has one variable assigned 1
+    i.e. each square should only have one number in the solution
+'''
 def square_rules(n, s, vars, num_constraints):
     s += '* square constraints\n'
     for i in range(n):
@@ -23,8 +26,11 @@ def square_rules(n, s, vars, num_constraints):
             num_constraints += 1
     return s, num_constraints
 
-# adds PBO constraints to s
-# that ensures each row has one of each value in [1,n]
+'''
+row_rules:
+    adds PBO constraints to s
+    that ensures each row has one of each value in [1,n]
+'''
 def row_rules(n, s, vars, num_constraints):
     s += '* row constraints\n'
     for i in range(n):
@@ -35,8 +41,11 @@ def row_rules(n, s, vars, num_constraints):
             num_constraints += 1
     return s, num_constraints
 
-# adds PBO constraints to s
-# that ensures each column has one of each value in [1,n]
+'''
+column_rules:
+    adds PBO constraints to s
+    that ensures each column has one of each value in [1,n]
+'''
 def column_rules(n, s, vars, num_constraints):
     s += '* column constraints\n'
     for i in range(n):
@@ -47,8 +56,11 @@ def column_rules(n, s, vars, num_constraints):
             num_constraints += 1
     return s, num_constraints
 
-# adds PBO constraints to s
-# that ensure each root(n) x root(n) box is unique
+'''
+box_rules:
+    adds PBO constraints to s
+    that ensure each root(n) x root(n) box is unique
+'''
 def box_rules(n, s, vars, num_constraints):
     root = int(math.sqrt(n))
     s += '* box constraints\n'
@@ -74,8 +86,11 @@ def box_rules(n, s, vars, num_constraints):
     return s, num_constraints
 
 
-# adds PBO constraints to s
-# that ensure unique diagonals
+'''
+diag_rules:
+    adds PBO constraints to s
+    that ensure unique diagonals
+'''
 def diag_rules(n, s, vars, num_constraints):
     s += '* diagonal constraints\n'
     down = {}
@@ -99,10 +114,12 @@ def diag_rules(n, s, vars, num_constraints):
         num_constraints += 2
     return s, num_constraints
 
-
-# construct a PBO problem that represents
-# the constraints for a sudoku puzzle
-# if diag == True, makes this a puzzle w/ unique diagonals
+'''
+sudoku_constraints:
+    construct a PBO problem that represents
+    the constraints for a sudoku puzzle
+    if diag == True, makes this a puzzle w/ unique diagonals
+'''
 def sudoku_constraints(n, diag, vars):
     s = ''
     num_constraints = 0
@@ -115,8 +132,11 @@ def sudoku_constraints(n, diag, vars):
     return s, num_constraints
 
 
-# given an opb solution of form x1 x2 x3 ... xn in string form
-# returns a dictionary mapping variables to their value in the solution
+'''
+parse_solution:
+    given an opb solution of form x1 x2 x3 ... xn in string form
+    returns a dictionary mapping variables to their value in the solution
+'''
 def parse_solution(sol):
     d = {}
     # it should always produce a solution
@@ -136,8 +156,11 @@ def parse_solution(sol):
             count += 1
     return d
 
-# given a mapping from vars to their ooolean value
-# in a solution construct the sudoku puzzle
+'''
+construct_puzzle:
+    given a mapping from vars to their ooolean value
+    in a solution construct the sudoku puzzle
+'''
 def construct_puzzle(n, vars, solution):
     s = []
     for i in range(n):
@@ -148,7 +171,10 @@ def construct_puzzle(n, vars, solution):
                     s[i].append(k + 1)
     return s
 
-# checks if the list of lists is a valid sudoku puzzle
+'''
+check_sudoku:
+    checks if the list of lists is a valid sudoku puzzle
+'''
 def check_sudoku(l):
     # check rows/columns O(n^3)
     for i in range(len(l)):
@@ -179,9 +205,12 @@ def check_sudoku(l):
         top_left_row += root
     return True
 
-# given an n x n array solve it as a sudoku puzzle
-# assumes any value not in [1,n] is unsolved
-# returns a solution iff the puzzle has that as its unique solution
+'''
+solver:
+    given an n x n array solve it as a sudoku puzzle
+    assumes any value not in [1,n] is unsolved
+    returns a solution iff the puzzle has that as its unique solution
+'''
 def solver(n, diag, puzzle, solver_invocation):
     
 
